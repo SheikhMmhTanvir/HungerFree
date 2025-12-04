@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Volunteer Dashboard - SmartFood{% endblock %}
+
+{% block content %}
+    <h2>Welcome back, {{ user.first_name|default:user.username }}!</h2>
+    <p style="color: #666;">Thanks for being a hero today.</p>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--orange);">Pending Deliveries</h3>
+        <p style="margin-bottom: 1.5rem; font-size: 0.9rem;">These items have been claimed by receivers but need transport.</p>
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="text-align: left; background: #f9f9f9; border-bottom: 2px solid #eee;">
+                    <th style="padding: 12px;">Food Item</th>
+                    <th style="padding: 12px;">From (Donor)</th>
+                    <th style="padding: 12px;">To (Receiver)</th>
+                    <th style="padding: 12px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery in pending_deliveries %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 12px;">
+                        <strong>{{ delivery.donation.title }}</strong><br>
+                        <span style="font-size: 0.8rem; color: #777;">{{ delivery.donation.pickup_location }}</span>
+                    </td>
+                    <td style="padding: 12px;">{{ delivery.donation.donor.username }}</td>
+                    <td style="padding: 12px;">{{ delivery.receiver.username|default:"Pending Receiver" }}</td>
+                    <td style="padding: 12px;">
+                        <button style="background: var(--green); color: white; border: none; padding: 8px 16px; border-radius: 99px; cursor: pointer; font-weight: 600;">
+                            Accept Task
+                        </button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="padding: 20px; text-align: center; color: #777;">
+                        No pending deliveries right now. Great job!
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

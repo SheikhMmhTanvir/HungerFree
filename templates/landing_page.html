@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartFood - Share Food. Spread Hope.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #2ECC71;
+            --orange: #E67E22;
+            --light-gray: #F9FAFB;
+            --dark-text: #1E1E1E;
+            --medium-gray: #6B7280;
+            --white: #FFFFFF;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: var(--dark-text); overflow-x: hidden; }
+        a { text-decoration: none; }
+
+        /* Navbar */
+        .navbar {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--green); }
+        .nav-links a { margin-left: 2rem; color: var(--medium-gray); font-weight: 600; }
+        .nav-links .btn { margin-left: 1.5rem; }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 24px;
+            border-radius: 99px;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-green { background: var(--green); color: white; border: 2px solid var(--green); }
+        .btn-green:hover { background: #27ae60; }
+        .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
+        .btn-outline:hover { background: #EAF7ED; }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 5%;
+            background: linear-gradient(180deg, #EAF7ED 0%, #FFFFFF 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
+        .hero p { color: var(--medium-gray); margin-bottom: 2rem; font-size: 1.1rem; }
+        .hero-img {
+            background: #d4efdf;
+            height: 350px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--green); font-style: italic;
+        }
+
+        /* Features Section */
+        .features { padding: 4rem 5%; background: var(--light-gray); text-align: center; }
+        .features h2 { margin-bottom: 3rem; }
+        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .feature-card {
+            background: white; padding: 2rem; border-radius: 16px; box-shadow: var(--shadow);
+        }
+        .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+        /* Footer */
+        footer { background: var(--dark-text); color: white; padding: 3rem 5%; text-align: center; }
+        footer a { color: #ccc; margin: 0 10px; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none; align-items: center; justify-content: center;
+            z-index: 1000;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: white; padding: 2.5rem; border-radius: 16px;
+            width: 90%; max-width: 400px; text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .role-btn {
+            display: block; width: 100%; padding: 1rem; margin-bottom: 1rem;
+            background: #f4f4f4; border: 2px solid transparent; border-radius: 12px;
+            color: var(--dark-text); font-weight: 600; transition: 0.3s;
+        }
+        .role-btn:hover { border-color: var(--green); background: #EAF7ED; color: var(--green); }
+        .close-modal { margin-top: 1rem; display: inline-block; color: var(--medium-gray); cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">SmartFood</a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
+            <button onclick="openModal()" class="btn btn-green">Sign Up</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <h1>Share Food.<br>Spread Hope.</h1>
+            <p>Join a smart community to eliminate hunger by connecting donors, receivers, and volunteers.</p>
+            <button onclick="openModal()" class="btn btn-green">Get Started</button>
+        </div>
+        <div class="hero-img">
+            [Illustration of Community Sharing]
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>How can you help?</h2>
+        <div class="card-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🧑‍🍳</span>
+                <h3>Donor</h3>
+                <p>Donate surplus food safely and help your neighbors.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🍛</span>
+                <h3>Receiver</h3>
+                <p>Get access to fresh food when you need it most.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🚗</span>
+                <h3>Volunteer</h3>
+                <p>Deliver food from donors to receivers and spread smiles.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 SmartFood. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">Terms</a>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="roleModal">
+        <div class="modal-box">
+            <h2>Who are you?</h2>
+            <p style="margin-bottom: 1.5rem; color: #666;">Choose your role to get started.</p>
+            
+            <a href="{% url 'signup' %}?role=donor" class="role-btn">🧑‍🍳 I am a Donor</a>
+            <a href="{% url 'signup' %}?role=receiver" class="role-btn">🍛 I am a Receiver</a>
+            <a href="{% url 'signup' %}?role=volunteer" class="role-btn">🚗 I am a Volunteer</a>
+            
+            <span class="close-modal" onclick="closeModal()">Cancel</span>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('roleModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('roleModal').classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>

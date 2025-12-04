@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Receiver Dashboard - SmartFood{% endblock %}
+
+{% block content %}
+    <h2>Welcome back, {{ user.first_name|default:user.username }}!</h2>
+    <p style="color: #666;">There are <strong>{{ available_donations.count }}</strong> food items available near you.</p>
+
+    <div style="margin-top: 2rem;">
+        <h3>Available Food</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+            
+            {% for donation in available_donations %}
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h4 style="margin: 0; font-size: 1.2rem;">{{ donation.title }}</h4>
+                    <span style="background: #EAF7ED; color: #2ECC71; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                        {{ donation.quantity }}
+                    </span>
+                </div>
+                
+                <p style="font-size: 0.9rem; color: #555; margin-bottom: 5px;">
+                    <strong>📍 Location:</strong> {{ donation.pickup_location }}
+                </p>
+                <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">
+                    <strong>👤 Donor:</strong> {{ donation.donor.username }}
+                </p>
+
+                <button style="width: 100%; background: var(--orange); border: none; padding: 10px; color: white; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    Claim This Food
+                </button>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; background: white; border-radius: 16px;">
+                <p>No food is currently available. Please check back later.</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
