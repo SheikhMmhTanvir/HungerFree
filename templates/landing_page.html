@@ -3,180 +3,440 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SmartFood - Share Food. Spread Hope.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HungerFree - Share Food. Spread Hope.</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --green: #2ECC71;
-            --orange: #E67E22;
-            --light-gray: #F9FAFB;
-            --dark-text: #1E1E1E;
-            --medium-gray: #6B7280;
-            --white: #FFFFFF;
-            --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            /* Professional Palette */
+            --green: #27ae60;
+            --green-hover: #219150;
+            --orange: #e67e22;
+            --dark-text: #2c3e50;
+            --text-gray: #5d6d7e;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            
+            /* Modern Shadow */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; color: var(--dark-text); overflow-x: hidden; }
-        a { text-decoration: none; }
 
-        /* Navbar */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; transition: 0.3s ease; }
+        ul { list-style: none; }
+
+        /* --- Navbar (Glass Effect) --- */
         .navbar {
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--white);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--green); }
-        .nav-links a { margin-left: 2rem; color: var(--medium-gray); font-weight: 600; }
-        .nav-links .btn { margin-left: 1.5rem; }
 
-        /* Buttons */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            margin-left: 2.5rem;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover { color: var(--green); }
+
+        /* --- Buttons --- */
         .btn {
-            padding: 10px 24px;
-            border-radius: 99px;
+            padding: 10px 28px;
+            border-radius: 50px;
             font-weight: 600;
-            transition: 0.3s;
+            font-size: 0.95rem;
             cursor: pointer;
-            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        .btn-green { background: var(--green); color: white; border: 2px solid var(--green); }
-        .btn-green:hover { background: #27ae60; }
-        .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
-        .btn-outline:hover { background: #EAF7ED; }
+        
+        .btn-green {
+            background: var(--green);
+            color: white;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+        .btn-green:hover {
+            background: var(--green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+        }
 
-        /* Hero Section */
+        .btn-outline {
+            background: transparent;
+            color: var(--green) !important; 
+            border-color: var(--green);
+        }
+        .btn-outline:hover {
+            background: var(--green);
+            color: white !important; 
+            border-color: var(--green);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+            
+        }
+
+        /* --- Hero Section --- */
         .hero {
-            padding: 5rem 5%;
-            background: linear-gradient(180deg, #EAF7ED 0%, #FFFFFF 100%);
+            padding: 6rem 5% 4rem;
+            background: radial-gradient(circle at top right, #eafaf1 0%, #ffffff 60%);
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--dark-text);
+        }
+        .hero h1 span { color: var(--green); }
+
+        .hero p {
+            color: var(--text-gray);
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+        }
+
+        .hero-img { position: relative; }
+        .hero-img img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.5s ease;
+        }
+        .hero-img:hover img { transform: scale(1.02); }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 6rem 5%;
+            background: var(--light-bg);
+            text-align: center;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .section-subtitle {
+            color: var(--text-gray);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: #eafaf1;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+        }
+
+        /* --- How It Works (Steps) --- */
+        .how-it-works {
+            padding: 6rem 5%;
+            background: var(--white);
+            text-align: center;
+            position: relative;
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .connecting-line {
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #e9ecef;
+            z-index: 0;
+            display: none;
+        }
+
+        @media(min-width: 768px) { .connecting-line { display: block; } }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            border: 3px solid #f1f3f5;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        /* --- About Section (New) --- */
+        .about-section {
+            padding: 6rem 5%;
+            background: #f8fff9;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
-            gap: 2rem;
+            gap: 4rem;
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
-        .hero p { color: var(--medium-gray); margin-bottom: 2rem; font-size: 1.1rem; }
-        .hero-img {
-            background: #d4efdf;
-            height: 350px;
-            border-radius: 16px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--green); font-style: italic;
+        .about-content h2 { margin-bottom: 1.5rem; font-size: 2.25rem; }
+        .about-content p { color: var(--text-gray); margin-bottom: 1rem; }
+        .about-img img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-md); }
+
+        /* --- Footer --- */
+        footer {
+            background: #1e272e;
+            color: #bdc3c7;
+            padding: 4rem 5% 2rem;
+            text-align: center;
         }
+        footer a { color: white; margin: 0 15px; font-weight: 500; }
+        footer a:hover { color: var(--green); }
+        footer p { margin-bottom: 1.5rem; opacity: 0.7; }
 
-        /* Features Section */
-        .features { padding: 4rem 5%; background: var(--light-gray); text-align: center; }
-        .features h2 { margin-bottom: 3rem; }
-        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .feature-card {
-            background: white; padding: 2rem; border-radius: 16px; box-shadow: var(--shadow);
-        }
-        .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-
-        /* Footer */
-        footer { background: var(--dark-text); color: white; padding: 3rem 5%; text-align: center; }
-        footer a { color: #ccc; margin: 0 10px; }
-
-        /* Modal Styles */
+        /* --- Modal --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: none; align-items: center; justify-content: center;
-            z-index: 1000;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+            display: none; align-items: center; justify-content: center; z-index: 2000;
+            opacity: 0; transition: opacity 0.3s ease;
         }
-        .modal-overlay.active { display: flex; }
-        .modal-box {
-            background: white; padding: 2.5rem; border-radius: 16px;
-            width: 90%; max-width: 400px; text-align: center;
-            animation: slideUp 0.3s ease;
-        }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-overlay.active { display: flex; opacity: 1; }
         
-        .role-btn {
-            display: block; width: 100%; padding: 1rem; margin-bottom: 1rem;
-            background: #f4f4f4; border: 2px solid transparent; border-radius: 12px;
-            color: var(--dark-text); font-weight: 600; transition: 0.3s;
+        .modal-box {
+            background: white; padding: 3rem; border-radius: 24px;
+            width: 90%; max-width: 420px; text-align: center;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9); transition: transform 0.3s ease;
         }
-        .role-btn:hover { border-color: var(--green); background: #EAF7ED; color: var(--green); }
-        .close-modal { margin-top: 1rem; display: inline-block; color: var(--medium-gray); cursor: pointer; }
+        .modal-overlay.active .modal-box { transform: scale(1); }
 
+        .role-btn {
+            display: block; width: 100%; padding: 1.2rem; margin-bottom: 1rem;
+            background: var(--light-bg); border: 2px solid transparent; border-radius: 12px;
+            color: var(--dark-text); font-weight: 600; font-size: 1.05rem;
+        }
+        .role-btn:hover {
+            border-color: var(--green); background: #eafaf1; color: var(--green);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 4rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { margin: 0 auto 2rem; }
+            .about-section { grid-template-columns: 1fr; }
+            .navbar .nav-links { display: none; } /* Simplified for mobile */
+        }
     </style>
 </head>
+
 <body>
 
     <nav class="navbar">
-        <a href="#" class="logo">SmartFood</a>
+        <a href="{% url 'landing_page' %}" class="logo">
+            HungerFree
+        </a>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
-            <button onclick="openModal()" class="btn btn-green">Sign Up</button>
+            <a href="{% url 'landing_page' %}">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            
+            <a href="{% url 'login' %}" class="btn btn-outline" style="margin-left: 2rem;">Login</a>
+            <button onclick="openModal()" class="btn btn-green" style="margin-left: 1rem;">Sign Up</button>
         </div>
     </nav>
 
     <section class="hero">
-        <div>
-            <h1>Share Food.<br>Spread Hope.</h1>
-            <p>Join a smart community to eliminate hunger by connecting donors, receivers, and volunteers.</p>
-            <button onclick="openModal()" class="btn btn-green">Get Started</button>
+        <div class="hero-content">
+            <h1>Share Food.<br><span>Spread Hope.</span></h1>
+            <p>Join a smart community dedicated to eliminating hunger. Connect seamlessly with donors, receivers, and volunteers to make a real difference.</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; md:justify-content: flex-start;">
+                <button onclick="openModal()" class="btn btn-green">Get Started</button>
+                <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+            </div>
         </div>
         <div class="hero-img">
-            [Illustration of Community Sharing]
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Community Food Sharing">
         </div>
     </section>
 
-    <section class="features">
-        <h2>How can you help?</h2>
-        <div class="card-grid">
-            <div class="feature-card">
-                <span class="feature-icon">🧑‍🍳</span>
-                <h3>Donor</h3>
-                <p>Donate surplus food safely and help your neighbors.</p>
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">How can you help?</h2>
+            <p class="section-subtitle">Choose a role that fits you and start making an impact today.</p>
+            
+            <div class="card-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🧑‍🍳</span>
+                    <h3>Become a Donor</h3>
+                    <p style="color: #666; margin-top: 1rem;">Have surplus food? Donate it safely to those in need instead of letting it go to waste.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🍛</span>
+                    <h3>Find Food</h3>
+                    <p style="color: #666; margin-top: 1rem;">Struggling to find a meal? Connect with local donors and get fresh food easily.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🚗</span>
+                    <h3>Volunteer</h3>
+                    <p style="color: #666; margin-top: 1rem;">Be the bridge. Help transport food from donors to receivers and spread smiles.</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">🍛</span>
-                <h3>Receiver</h3>
-                <p>Get access to fresh food when you need it most.</p>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">Get Started in 3 Steps</h2>
+        <div class="steps-container">
+            <div class="connecting-line"></div>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-circle">1</div>
+                    <h3>Register</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Create your free account in less than a minute.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle" style="border-color: var(--orange); color: var(--orange);">2</div>
+                    <h3>Choose Role</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Select if you're a Donor, Receiver, or Volunteer.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle" style="border-color: #3498db; color: #3498db;">3</div>
+                    <h3>Start Sharing</h3>
+                    <p style="color: #666; font-size: 0.9rem;">Begin donating, receiving, or delivering food.</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">🚗</span>
-                <h3>Volunteer</h3>
-                <p>Deliver food from donors to receivers and spread smiles.</p>
-            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Volunteers working">
+        </div>
+        <div class="about-content">
+            <h2>About HungerFree</h2>
+            <p>HungerFree is a technology-driven platform designed to reduce food waste and alleviate hunger in our local communities.</p>
+            <p>By connecting restaurants, grocery stores, and individuals with surplus food to local shelters and people in need, we create a sustainable cycle of sharing and caring.</p>
+            <br>
+            <a href="#" style="color: var(--green); font-weight: 600;">Read our full story &rarr;</a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 SmartFood. All rights reserved.</p>
-        <div style="margin-top: 1rem;">
-            <a href="#">About</a>
+        <h3 style="color: white; margin-bottom: 1rem;">HungerFree</h3>
+        <p>&copy; 2025 HungerFree. All rights reserved.</p>
+        <div style="margin-top: 2rem;">
+            <a href="#about">About Us</a>
             <a href="#">Contact</a>
-            <a href="#">Terms</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
         </div>
     </footer>
 
     <div class="modal-overlay" id="roleModal">
         <div class="modal-box">
-            <h2>Who are you?</h2>
-            <p style="margin-bottom: 1.5rem; color: #666;">Choose your role to get started.</p>
-            
+            <h2 style="margin-bottom: 0.5rem;">Who are you?</h2>
+            <p style="margin-bottom: 2rem; color: #888;">Select your role to continue.</p>
+
             <a href="{% url 'signup' %}?role=donor" class="role-btn">🧑‍🍳 I am a Donor</a>
             <a href="{% url 'signup' %}?role=receiver" class="role-btn">🍛 I am a Receiver</a>
             <a href="{% url 'signup' %}?role=volunteer" class="role-btn">🚗 I am a Volunteer</a>
-            
-            <span class="close-modal" onclick="closeModal()">Cancel</span>
+
+            <span style="display: block; margin-top: 1.5rem; color: #999; cursor: pointer; font-size: 0.9rem;" onclick="closeModal()">Cancel</span>
         </div>
     </div>
 
     <script>
         function openModal() {
-            document.getElementById('roleModal').classList.add('active');
+            const modal = document.getElementById('roleModal');
+            modal.style.display = 'flex'; // Ensure display is flex before opacity transition
+            setTimeout(() => { modal.classList.add('active'); }, 10);
         }
         function closeModal() {
-            document.getElementById('roleModal').classList.remove('active');
+            const modal = document.getElementById('roleModal');
+            modal.classList.remove('active');
+            setTimeout(() => { modal.style.display = 'none'; }, 300); // Wait for transition
         }
+
+        // Close modal when clicking outside
+        document.getElementById('roleModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
     </script>
 
 </body>
